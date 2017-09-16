@@ -1,1 +1,3 @@
-Hi!
+HACK MIT Git stories project
+
+
