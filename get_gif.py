@@ -31,6 +31,7 @@ class Get_Giffer:
 
 
     def make_GIPHY_url(self):
+        print(self.search)
         for word in self.search:
             self.url.append(GIPHY_BASE_URL + word + api_key + limit_format)
         #return slist of url's

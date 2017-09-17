@@ -48,12 +48,15 @@ class Extractor:
         return self.list_of_sentiment
 
     def choosing_gif(self):
+        self.list_of_sentiment = []
         return random.choice(self.compiling_good_gifs())
 
     def running_gifs(self):
+        #print(self.list_of_list_of_gifs)
         for list_of_gif in self.list_of_list_of_gifs:
-            list_of_gif = self.list_of_gifs
-            self.list_of_random_gifs.append(self.choosing_gif)
+            self.list_of_gifs = list_of_gif
+            #print(self.list_of_gifs)
+            self.list_of_random_gifs.append(self.choosing_gif())
         return self.list_of_random_gifs
 
 if __name__ == '__main__':
@@ -61,5 +64,5 @@ if __name__ == '__main__':
     Gif_list = Get_Giffer.get_json(search_list)
     sentiment = Get_Giffer.output_sentiment(search_list)
     giffy = Extractor(Gif_list,sentiment)
-    Gif = Extractor.choosing_gif(giffy)
+    Gif = Extractor.running_gifs(giffy)
     print(Gif)

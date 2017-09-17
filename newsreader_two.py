@@ -30,7 +30,7 @@ class Newsreader:
 
     def cleanText(self):
         art = self.loadArticleToText()
-        exclude = set(string.punctuation)  # makes set of punctuation characters
+        exclude = set(string.punctuation + '—')  # makes set of punctuation characters
         s = ''.join(ch for ch in art if ch not in exclude)  # for each character of the story creates a new string without any of the pucntiation
         stop = set(stopwords.words('english'))
         words = ['would', "should", "could", "said"]
@@ -67,8 +67,11 @@ class Newsreader:
         #print('chicharito!')
         sys.dont_write_bytecode = True
         art_words = self.word_Frequency()
+        print(art_words)
         artsorted = sorted(art_words, key=art_words.__getitem__, reverse=True) # sorts dictionary by value (by frequency of word in story) highest value first
+        print(artsorted)
         artsorted = artsorted[:5] # returns the first 10 words
+        print(artsorted)
         return(artsorted)
 
 
