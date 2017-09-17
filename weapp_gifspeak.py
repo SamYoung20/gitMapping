@@ -8,6 +8,9 @@ from flask import render_template, request, send_from_directory
 from extractor import Extractor
 from get_gif import Get_Giffer
 
+HOST = '0.0.0.0' if 'PORT' in os.environ else '127.0.0.1'
+PORT = int(os.environ.get('PORT', 5000))
+
 app = Flask(__name__)
 
 @app.route('/', methods=['GET','POST'])
@@ -65,4 +68,6 @@ def text_input(url1=None, url2=None, url3=None, url4=None, url5=None):
 
 if __name__ == '__main__':
 
-    app.run(port=5002)
+    #app.run(port=5002)
+
+    app.run(app.run(host=HOST, port=PORT))
