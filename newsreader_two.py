@@ -10,13 +10,15 @@ import indicoio
 from indicoio import sentiment_hq
 from nltk import word_tokenize
 from nltk.corpus import stopwords
+import sys
 
 indicoio.config.api_key = '87d9790380445510f53e1d851d96553c'
-
+#sys.dont_write_bytecode = True
 
 class Newsreader:
 
     def __init__(self, url1):
+        sys.dont_write_bytecode = True
         self.article = Article(url=url1)
 
     def loadArticleToText(self):
@@ -63,6 +65,7 @@ class Newsreader:
     def top_5(self):
         #finds top 10 words used
         #print('chicharito!')
+        sys.dont_write_bytecode = True
         art_words = self.word_Frequency()
         artsorted = sorted(art_words, key=art_words.__getitem__, reverse=True) # sorts dictionary by value (by frequency of word in story) highest value first
         artsorted = artsorted[:5] # returns the first 10 words
@@ -70,6 +73,8 @@ class Newsreader:
 
 
 if __name__ == '__main__':
+    #sys.dont_write_bytecode = True
+
     reader = Newsreader('https://www.washingtonpost.com/powerpost/to-make-their-tax-plan-work-republicans-eye-a-favorite-blue-state-break/2017/09/16/c726d506-9a26-11e7-b569-3360011663b4_story.html?hpid=hp_hp-top-table-main_taxpolitics-3pm%3Ahomepage%2Fstory&utm_term=.4a4beb64240d')
     #print(reader.loadArticleToText())
     topWords = reader.top_5()
