@@ -4,7 +4,7 @@ from urllib.request import urlopen
 import json
 import math
 import pprint
-from newsreader import Newsreader
+from newsreader_two import Newsreader
 GIPHY_BASE_URL = "http://api.giphy.com/v1/gifs/search?q="
 api_key = "&api_key=ArJf7WEbSsinMVRarXZoXn97gZhvsAau"
 limit_format = "&limit=5"
@@ -15,8 +15,12 @@ class Get_Giffer:
     def __init__(self, urlNews):
         reading = Newsreader(urlNews)
         self.search = reading.top_5()
-        print(self.search)
+        self.sentiment = reading.analyze_Sentiment_indico()
+        #print(self.search)
         self.url = None
+
+    def output_sentiment(self):
+        return self.sentiment
 
     def make_GIPHY_url(self):
         #print(self.search)
@@ -30,6 +34,7 @@ class Get_Giffer:
         for a JSON web API request, return
         a Python JSON object containing the response to that request.
         """
+        #self.make_GIPHY_url()
         self.encode_search()
         f = urlopen(self.url)
         response_text = f.read()

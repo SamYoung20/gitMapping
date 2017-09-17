@@ -62,7 +62,7 @@ class Newsreader:
 
     def top_5(self):
         #finds top 10 words used
-        print('chicharito!')
+        #print('chicharito!')
         art_words = self.word_Frequency()
         artsorted = sorted(art_words, key=art_words.__getitem__, reverse=True) # sorts dictionary by value (by frequency of word in story) highest value first
         artsorted = artsorted[:5] # returns the first 10 words
@@ -74,3 +74,5 @@ if __name__ == '__main__':
     #print(reader.loadArticleToText())
     topWords = reader.top_5()
     sentiment = reader.analyze_Sentiment_indico()
+    print(topWords)
+    print(sentiment)

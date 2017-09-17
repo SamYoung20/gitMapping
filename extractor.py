@@ -18,12 +18,14 @@ indicoio.config.api_key = '87d9790380445510f53e1d851d96553c'
 
 class Extractor:
     def __init__(self, list_of_gifs, text_sentiment):
-        self.list_of_gifs = list_of_gifs
+        self.list_of_list_of_gifs = list_of_gifs
+        self.list_of_gifs = None
         self.gif_max_object = None
         self.list_objects = []
         self.text_sentiment = text_sentiment
         self.sentiment_output = None
         self.list_of_sentiment =[]
+        self.list_of_random_gifs = []
 
 
     def analyze_image(self,gif_url):
@@ -32,6 +34,8 @@ class Extractor:
         self.list_objects = [name for name, prob in gif_output.items() if prob > .1]
         if len(self.list_objects) == 1:
             self.sentiment_output = indicoio.sentiment_hq(self.list_objects[0])
+        elif len(self.list_objects) == 0:
+            return self.text_sentiment
         else:
             self.sentiment_output = indicoio.sentiment_hq(self.list_objects)
             self.sentiment_output = np.mean(self.sentiment_output)
@@ -46,8 +50,16 @@ class Extractor:
     def choosing_gif(self):
         return random.choice(self.compiling_good_gifs())
 
+    def running_gifs(self):
+        for list_of_gif in self.list_of_list_of_gifs:
+            list_of_gif = self.list_of_gifs
+            self.list_of_random_gifs.append(self.choosing_gif)
+        return self.list_of_random_gifs
+
 if __name__ == '__main__':
-    search_list = Get_Giffer(["cat","dog"])
+    search_list = Get_Giffer('https://www.washingtonpost.com/powerpost/to-make-their-tax-plan-work-republicans-eye-a-favorite-blue-state-break/2017/09/16/c726d506-9a26-11e7-b569-3360011663b4_story.html?hpid=hp_hp-top-table-main_taxpolitics-3pm%3Ahomepage%2Fstory&utm_term=.4a4beb64240d')
     Gif_list = Get_Giffer.get_json(search_list)
-    giffy = Extractor(Gif_list,.8)
+    sentiment = Get_Giffer.output_sentiment(search_list)
+    giffy = Extractor(Gif_list,sentiment)
     Gif = Extractor.choosing_gif(giffy)
+    print(Gif)
