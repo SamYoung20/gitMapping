@@ -34,7 +34,7 @@ class Extractor:
         """
         gif_output = []
         gif_output = indicoio.image_recognition(gif_url)
-        self.list_objects = [name for name, prob in gif_output.items() if prob > .05]
+        self.list_objects = [name for name, prob in gif_output.items() if prob > .1]
         if len(self.list_objects) == 1:
             self.sentiment_output = indicoio.sentiment_hq(self.list_objects[0])
         elif len(self.list_objects) == 0:
@@ -51,6 +51,8 @@ class Extractor:
         for gif in self.list_of_gifs:
             if self.text_sentiment*.8 <= self.analyze_image(gif) <= self.text_sentiment*1.2:
                 self.list_of_sentiment.append(gif)
+            if len(self.list_of_sentiment) == 0:
+                return self.list_of_gifs
         return self.list_of_sentiment
 
     def choosing_gif(self):
