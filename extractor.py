@@ -33,7 +33,15 @@ class Extractor:
         Checks to see if there are any recognizable objects in the gifs, and if there are performs sentiment analysis on the objects. Then it outputs the average of the sentiment analysis of all the objects
         """
         gif_output = []
-        gif_output = indicoio.image_recognition(gif_url)
+        #print(gif_url)
+        while True:
+            try:
+                gif_output = indicoio.image_recognition(gif_url)
+                break
+            except ValueError:
+                #print('oops')
+                return None
+        #print(gif_output)
         self.list_objects = [name for name, prob in gif_output.items() if prob > .1]
         if len(self.list_objects) == 1:
             self.sentiment_output = indicoio.sentiment_hq(self.list_objects[0])
@@ -49,10 +57,11 @@ class Extractor:
         Checks that the sentiments of the gifs are within range of the sentiment analysis of the article
         """
         for gif in self.list_of_gifs:
-            if self.text_sentiment*.8 <= self.analyze_image(gif) <= self.text_sentiment*1.2:
-                self.list_of_sentiment.append(gif)
-            if len(self.list_of_sentiment) == 0:
-                return self.list_of_gifs
+            if self.analyze_image(gif) != None:
+                if self.text_sentiment*.8 <= self.analyze_image(gif) <= self.text_sentiment*1.2:
+                    self.list_of_sentiment.append(gif)
+                if len(self.list_of_sentiment) == 0:
+                    return self.list_of_gifs
         return self.list_of_sentiment
 
     def choosing_gif(self):
@@ -72,7 +81,7 @@ class Extractor:
         return self.list_of_random_gifs
 
 if __name__ == '__main__':
-    search_list = Get_Giffer('https://www.washingtonpost.com/powerpost/to-make-their-tax-plan-work-republicans-eye-a-favorite-blue-state-break/2017/09/16/c726d506-9a26-11e7-b569-3360011663b4_story.html?hpid=hp_hp-top-table-main_taxpolitics-3pm%3Ahomepage%2Fstory&utm_term=.4a4beb64240d')
+    search_list = Get_Giffer('http://www.foxnews.com/sports/2017/09/18/nascar-driver-pilot-killed-in-connecticut-plane-crash.html')
     Gif_list = Get_Giffer.get_json(search_list)
     sentiment = Get_Giffer.output_sentiment(search_list)
     giffy = Extractor(Gif_list,sentiment)

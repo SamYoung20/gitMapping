@@ -30,6 +30,7 @@ class Get_Giffer:
 
 
     def make_GIPHY_url(self):
+        print(self.search)
         for word in self.search:
             self.url.append(GIPHY_BASE_URL + word + api_key + limit_format)
         #return slist of url's
@@ -59,6 +60,6 @@ class Get_Giffer:
 
 if __name__ == '__main__':
     sys.dont_write_bytecode = True
-    urlForNews = Get_Giffer('https://www.washingtonpost.com/powerpost/to-make-their-tax-plan-work-republicans-eye-a-favorite-blue-state-break/2017/09/16/c726d506-9a26-11e7-b569-3360011663b4_story.html?hpid=hp_hp-top-table-main_taxpolitics-3pm%3Ahomepage%2Fstory&utm_term=.4a4beb64240d')
+    urlForNews = Get_Giffer('http://www.foxnews.com/sports/2017/09/18/nascar-driver-pilot-killed-in-connecticut-plane-crash.html')
     Gif = Get_Giffer.get_json(urlForNews)
     pprint.pprint(Gif)
