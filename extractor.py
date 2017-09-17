@@ -11,6 +11,7 @@ import pprint
 import indicoio
 from indicoio import political, sentiment, language, text_tags, keywords, fer, facial_features, image_features
 from get_gif import Get_Gif
+import numpy as np
 
 indicoio.config.api_key = '87d9790380445510f53e1d851d96553c'
 
@@ -29,7 +30,11 @@ class Extractor:
         gif_output = []
         gif_output = indicoio.image_recognition(gif_url)
         self.list_objects = [name for name, prob in gif_output.items() if prob > .1]
-        self.sentiment_output = indicoio.sentiment_hq(self.list_objects[0])
+        if len(self.list_objects) == 1:
+            self.sentiment_output = indicoio.sentiment_hq(self.list_objects[0])
+        else:
+            self.sentiment_output = indicoio.sentiment_hq(self.list_objects)
+            self.sentiment_output = np.mean(self.sentiment_output)
         return self.sentiment_output
 
     def compiling_good_gifs(self):
@@ -39,10 +44,10 @@ class Extractor:
         return self.list_of_sentiment
 
     def choosing_gif(self):
-        return print(random.choice(self.compiling_good_gifs()))
+        return random.choice(self.compiling_good_gifs())
 
 if __name__ == '__main__':
-    search_list = Get_Gif(["cat","dog"],"")
+    search_list = Get_Gif(["cat","dog"])
     Gif_list = Get_Gif.get_json(search_list)
     giffy = Extractor(Gif_list,.8)
     Gif = Extractor.choosing_gif(giffy)

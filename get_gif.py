@@ -12,9 +12,9 @@ limit = 5
 
 class Get_Gif:
 
-    def __init__(self, search, url):
+    def __init__(self, search):
         self.search = search
-        self.url = url
+        self.url = None
 
     def make_GIPHY_url(self):
         #print(self.search)
@@ -58,7 +58,7 @@ class Get_Gif:
 
 
 if __name__ == '__main__':
-    search_list = Get_Gif(["cat","dog"],"")
+    search_list = Get_Gif(["cat","dog"])
     #gif_list = Get_Gif.encode_search(search_list)
 
     Gif = Get_Gif.get_json(search_list)
