@@ -10,7 +10,7 @@ import math
 import pprint
 import indicoio
 from indicoio import political, sentiment, language, text_tags, keywords, fer, facial_features, image_features
-from get_gif import Get_Gif
+from get_gif import Get_Giffer
 import numpy as np
 
 indicoio.config.api_key = '87d9790380445510f53e1d851d96553c'
@@ -47,11 +47,7 @@ class Extractor:
         return random.choice(self.compiling_good_gifs())
 
 if __name__ == '__main__':
-    search_list = Get_Gif(["cat","dog"])
-    Gif_list = Get_Gif.get_json(search_list)
+    search_list = Get_Giffer(["cat","dog"])
+    Gif_list = Get_Giffer.get_json(search_list)
     giffy = Extractor(Gif_list,.8)
     Gif = Extractor.choosing_gif(giffy)
-
-
-    #gif_list = Get_Gif.encode_search(search_list)
-    #search_list = Get_Gif(["cat","dog"],"")

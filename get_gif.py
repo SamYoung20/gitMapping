@@ -4,16 +4,18 @@ from urllib.request import urlopen
 import json
 import math
 import pprint
-
+from newsreader import Newsreader
 GIPHY_BASE_URL = "http://api.giphy.com/v1/gifs/search?q="
 api_key = "&api_key=ArJf7WEbSsinMVRarXZoXn97gZhvsAau"
 limit_format = "&limit=5"
 limit = 5
 
-class Get_Gif:
+class Get_Giffer:
 
-    def __init__(self, search):
-        self.search = search
+    def __init__(self, urlNews):
+        reading = Newsreader(urlNews)
+        self.search = reading.top_5()
+        print(self.search)
         self.url = None
 
     def make_GIPHY_url(self):
@@ -58,8 +60,6 @@ class Get_Gif:
 
 
 if __name__ == '__main__':
-    search_list = Get_Gif(["cat","dog"])
-    #gif_list = Get_Gif.encode_search(search_list)
-
-    Gif = Get_Gif.get_json(search_list)
+    urlForNews = Get_Giffer('https://www.washingtonpost.com/powerpost/to-make-their-tax-plan-work-republicans-eye-a-favorite-blue-state-break/2017/09/16/c726d506-9a26-11e7-b569-3360011663b4_story.html?hpid=hp_hp-top-table-main_taxpolitics-3pm%3Ahomepage%2Fstory&utm_term=.4a4beb64240d')
+    Gif = Get_Giffer.get_json(urlForNews)
     pprint.pprint(Gif)
