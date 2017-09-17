@@ -5,6 +5,8 @@ Flask webapp for gif speak
 from flask import Flask
 import os
 from flask import render_template, request, send_from_directory
+from extractor import Extractor
+from get_gif import Get_Giffer
 
 HOST = '0.0.0.0' if 'PORT' in os.environ else '127.0.0.1'
 PORT = int(os.environ.get('PORT', 5000))
@@ -40,7 +42,13 @@ def text_input(url1=None,url2=None,url3=None,url4=None,url5=None):
     if request.method == 'POST':
         if request.form['GIF!'] and request.form['url']:
             #this is where the code would go to call sams function
-            url_list = ['https://media2.giphy.com/media/9IRX12VhoXoR2/200.gif', 'https://media2.giphy.com/media/9IRX12VhoXoR2/200.gif', 'https://media2.giphy.com/media/9IRX12VhoXoR2/200.gif', 'https://media2.giphy.com/media/9IRX12VhoXoR2/200.gif', 'https://media2.giphy.com/media/9IRX12VhoXoR2/200.gif']
+            result = request.form['url']
+            search_list = Get_Giffer(result)
+            Gif_list = Get_Giffer.get_json(search_list)
+            sentiment = Get_Giffer.output_sentiment(search_list)
+            giffy = Extractor(Gif_list,sentiment)
+            url_list = Extractor.running_gifs(giffy)
+            print(url_list)
             url1 = url_list[0]
             url2 = url_list[1]
             url3 = url_list[2]
