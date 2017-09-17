@@ -17,9 +17,9 @@ class Get_Gif:
         self.url = url
 
     def make_GIPHY_url(self):
-        print(self.search)
+        #print(self.search)
         self.url = GIPHY_BASE_URL + self.search + api_key + limit_format
-        print(self.url)
+        #print(self.url)
         return self.url
 
     def get_json(self):
@@ -28,6 +28,7 @@ class Get_Gif:
         for a JSON web API request, return
         a Python JSON object containing the response to that request.
         """
+        self.encode_search()
         f = urlopen(self.url)
         response_text = f.read()
         response_data = str(response_text, "utf-8")
@@ -52,10 +53,13 @@ class Get_Gif:
         self.url = self.make_GIPHY_url()
         return self.url
 
+    #def compile(self):
 
-search_list = Get_Gif(["cat","dog"],"")
-gif_list = Get_Gif.encode_search(search_list)
-print(gif_list)
 
-Gif = Get_Gif.get_json(search_list)
-pprint.pprint(Gif)
+
+if __name__ == '__main__':
+    search_list = Get_Gif(["cat","dog"],"")
+    #gif_list = Get_Gif.encode_search(search_list)
+
+    Gif = Get_Gif.get_json(search_list)
+    pprint.pprint(Gif)
