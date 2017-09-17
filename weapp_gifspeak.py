@@ -64,4 +64,5 @@ def text_input(url1=None, url2=None, url3=None, url4=None, url5=None):
         return render_template('home.html')
 
 if __name__ == '__main__':
-    app.run()
+
+    app.run(port=5002)
