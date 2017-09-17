@@ -9,6 +9,7 @@ sys.dont_write_bytecode = True
 from newsreader_two import Newsreader
 import indicoio
 
+sys.dont_write_bytecode = True
 GIPHY_BASE_URL = "http://api.giphy.com/v1/gifs/search?q="
 api_key = "&api_key=ArJf7WEbSsinMVRarXZoXn97gZhvsAau"
 limit_format = "&limit=5"
