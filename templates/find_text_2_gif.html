@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Anton" />
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Anton" />
+    <head>
+        <meta charset="utf-8">
+        <title>
+            Recommended Route | Gif2Txt
+        </title>
+    </head>
+    <body>
+<div class="header-container">
+      <div class="header">
+        <h1>Gif2Text</h1>
+            <div class = "topnav" id = "myTopnav">
+             <a href="/">Home</a>
+             <a href="/the_app">The App</a>
+             <a href="/about_project">Learn more</a>
+             <a href="/about_us">Meet the team</a>
+       </div>
+    </div>
+</div>
+</body>
+
+
+<div id = "content">
+<body>
+     <h1>Get u r gifz</h1>
+     <p>Copy and paste the url of a news article that you wish to translate to gif speek</p>
+     <form action="/text_input" method="post">
+      <br>
+      <input type="text" name="url"></br>
+      <br>
+      <input type="submit" name="GIF!" value="GIF IT!"</br>
+    </form>
+</body>
+</div>
