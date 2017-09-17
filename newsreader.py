@@ -35,9 +35,7 @@ class Newsreader:
         stop = set(stopwords.words('english'))
         words = ['would', "should", "could", "said"]
         nonCommon = [i for i in s.lower().split() if ((i not in stop) and (i not in words))]
-        #print(nonCommon) #breaks up string at the spaces creates a list of elements
         artList = [element for element in nonCommon if (len(element) > 4)] # only inlcudes words longer than 4 characters and not in the title
-        #print(type(artList))
         return nonCommon
 
 
@@ -64,22 +62,16 @@ class Newsreader:
 
     def top_5(self):
         #finds top 10 words used
-        #print('chicharito!')
-        sys.dont_write_bytecode = True
         art_words = self.word_Frequency()
-        print(art_words)
         artsorted = sorted(art_words, key=art_words.__getitem__, reverse=True) # sorts dictionary by value (by frequency of word in story) highest value first
-        print(artsorted)
         artsorted = artsorted[:5] # returns the first 10 words
-        print(artsorted)
+
         return(artsorted)
 
 
 if __name__ == '__main__':
     #sys.dont_write_bytecode = True
-
     reader = Newsreader('https://www.washingtonpost.com/powerpost/to-make-their-tax-plan-work-republicans-eye-a-favorite-blue-state-break/2017/09/16/c726d506-9a26-11e7-b569-3360011663b4_story.html?hpid=hp_hp-top-table-main_taxpolitics-3pm%3Ahomepage%2Fstory&utm_term=.4a4beb64240d')
-    #print(reader.loadArticleToText())
     topWords = reader.top_5()
     sentiment = reader.analyze_Sentiment_indico()
     print(topWords)

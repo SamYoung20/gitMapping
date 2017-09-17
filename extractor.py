@@ -29,9 +29,12 @@ class Extractor:
 
 
     def analyze_image(self,gif_url):
+        """
+        Checks to see if there are any recognizable objects in the gifs, and if there are performs sentiment analysis on the objects. Then it outputs the average of the sentiment analysis of all the objects
+        """
         gif_output = []
         gif_output = indicoio.image_recognition(gif_url)
-        self.list_objects = [name for name, prob in gif_output.items() if prob > .1]
+        self.list_objects = [name for name, prob in gif_output.items() if prob > .05]
         if len(self.list_objects) == 1:
             self.sentiment_output = indicoio.sentiment_hq(self.list_objects[0])
         elif len(self.list_objects) == 0:
@@ -42,20 +45,27 @@ class Extractor:
         return self.sentiment_output
 
     def compiling_good_gifs(self):
+        """
+        Checks that the sentiments of the gifs are within range of the sentiment analysis of the article
+        """
         for gif in self.list_of_gifs:
             if self.text_sentiment*.8 <= self.analyze_image(gif) <= self.text_sentiment*1.2:
                 self.list_of_sentiment.append(gif)
         return self.list_of_sentiment
 
     def choosing_gif(self):
+        """
+        Resets the sentiment values for each list of gifs and randomly choses one of the optimal gifs
+        """
         self.list_of_sentiment = []
         return random.choice(self.compiling_good_gifs())
 
     def running_gifs(self):
-        #print(self.list_of_list_of_gifs)
+        """
+        Takes each of the list of list of possible gifs and runs through all the gif lists and calls choosing_gif in order to select what gif to chose
+        """
         for list_of_gif in self.list_of_list_of_gifs:
             self.list_of_gifs = list_of_gif
-            #print(self.list_of_gifs)
             self.list_of_random_gifs.append(self.choosing_gif())
         return self.list_of_random_gifs
 

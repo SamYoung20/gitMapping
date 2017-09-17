@@ -6,7 +6,7 @@ import math
 import pprint
 import sys
 sys.dont_write_bytecode = True
-from newsreader_two import Newsreader
+from newsreader import Newsreader
 import indicoio
 
 sys.dont_write_bytecode = True
@@ -22,17 +22,14 @@ class Get_Giffer:
         reading = Newsreader(urlNews)
         self.search = reading.top_5()
         self.sentiment = reading.analyze_Sentiment_indico()
-        #print(self.search)
         self.url = []
 
     def output_sentiment(self):
         return self.sentiment
-        #print(self.search)
         self.url = None
 
 
     def make_GIPHY_url(self):
-        print(self.search)
         for word in self.search:
             self.url.append(GIPHY_BASE_URL + word + api_key + limit_format)
         #return slist of url's
@@ -51,7 +48,6 @@ class Get_Giffer:
             response_text = f.read()
             response_data = str(response_text, "utf-8")
             response_data = json.loads(response_data)
-        #pprint.pprint(response_data)
             gif_urls = []
             for result in range(limit):
                 result = response_data['data'][result]
