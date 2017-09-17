@@ -4,7 +4,7 @@ from urllib.request import urlopen
 import json
 import math
 import pprint
-from newsreader import Newsreader
+from newsReader import Newsreader
 GIPHY_BASE_URL = "http://api.giphy.com/v1/gifs/search?q="
 api_key = "&api_key=ArJf7WEbSsinMVRarXZoXn97gZhvsAau"
 limit_format = "&limit=5"
