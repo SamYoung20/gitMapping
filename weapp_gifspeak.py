@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 def starting_page(top_story1=None):
     top_story1 = text_input(url1=None,url2=None,url3=None,url4=None,url5=None)
-    return render_template('home.html', top_story1=top_story1)
+    return render_template('newHome.html', top_story1=top_story1)
 
 @app.route('/test')
 def test():
@@ -34,8 +34,9 @@ def the_app(url=None):
         return redirect('home.html')
     return render_template('find_text_2_gif.html', url=url)
 
+
 @app.route('/text_input', methods=['GET', 'POST'])
-def text_input(url1=None,url2=None,url3=None,url4=None,url5=None):
+def text_input(url1=None, url2=None, url3=None, url4=None, url5=None):
     if request.method == 'POST':
         result = request.form
         for key, val in result.items():
@@ -50,7 +51,6 @@ def text_input(url1=None,url2=None,url3=None,url4=None,url5=None):
             sentiment = Get_Giffer.output_sentiment(search_list)
             giffy = Extractor(Gif_list,sentiment)
             url_list = Extractor.running_gifs(giffy)
-            print(url_list)
             url1 = url_list[0]
             url2 = url_list[1]
             url3 = url_list[2]
@@ -64,4 +64,4 @@ def text_input(url1=None,url2=None,url3=None,url4=None,url5=None):
         return render_template('home.html')
 
 if __name__ == '__main__':
-    app.run(port=5003)
+    app.run()
