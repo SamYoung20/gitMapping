@@ -35,6 +35,10 @@ def the_app(url=None):
 @app.route('/text_input', methods=['GET', 'POST'])
 def text_input(url1=None,url2=None,url3=None,url4=None,url5=None):
     if request.method == 'POST':
+        result = request.form
+        for key, val in result.items():
+            if key == 'url':
+                urlNews = val
         if request.form['GIF!'] and request.form['url']:
             #this is where the code would go to call sams function
             url_list = ['https://media2.giphy.com/media/9IRX12VhoXoR2/200.gif', 'https://media2.giphy.com/media/9IRX12VhoXoR2/200.gif', 'https://media2.giphy.com/media/9IRX12VhoXoR2/200.gif', 'https://media2.giphy.com/media/9IRX12VhoXoR2/200.gif', 'https://media2.giphy.com/media/9IRX12VhoXoR2/200.gif']
@@ -43,7 +47,7 @@ def text_input(url1=None,url2=None,url3=None,url4=None,url5=None):
             url3 = url_list[2]
             url4 = url_list[3]
             url5 = url_list[4]
-            return render_template('gif_results.html', url1=url1,url2=url2, url3=url3,url4=url4,url5=url5)
+            return render_template('gif_results.html', urlNews=urlNews, url1=url1,url2=url2, url3=url3,url4=url4,url5=url5)
         else:
             return render_template('find_text_2_gif.html')
 
