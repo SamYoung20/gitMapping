@@ -1,7 +1,6 @@
 import requests
 import re
 import string
-from bs4 import BeautifulSoup
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import newspaper
 from newspaper import Article
@@ -39,13 +38,13 @@ class Newsreader:
         return nonCommon
 
 
-    def analyze_Sentiment(self):
+    """def analyze_Sentiment(self):
         # needs a str or a file no lists
         #makes dictionary of sentiment
         art = self.cleanText()
         s = ' '.join(ch for ch in art)
         analyzer = SentimentIntensityAnalyzer()
-        return analyzer.polarity_scores(s)
+        return analyzer.polarity_scores(s)"""
 
     def analyze_Sentiment_indico(self):
         art = self.cleanText()
