@@ -3,6 +3,7 @@ import operator
 from PIL import Image
 import random
 import urllib
+import PIL
 from urllib.parse import urlencode
 from urllib.request import urlopen
 import json
