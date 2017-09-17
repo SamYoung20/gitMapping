@@ -18,3 +18,4 @@ pillow==4.2.1
 olefile==0.44
 futures==3.1.1
 gunicorn==19.7.1
+vaderSentiment==2.5
