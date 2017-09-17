@@ -41,6 +41,7 @@ def text_input(url1=None,url2=None,url3=None,url4=None,url5=None):
         for key, val in result.items():
             if key == 'url':
                 urlNews = val
+                print(urlNews)
         if request.form['GIF!'] and request.form['url']:
             #this is where the code would go to call sams function
             result = request.form['url']
