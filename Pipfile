@@ -5,7 +5,7 @@ verify_ssl = true
 
 flask = "==0.12"
 requests = "==2.18.4"
-nltk = "==3.2.4"
+nltk = "==3.4.5"
 indicoio = "==1.1.1"
 numpy = "==1.13.1"
 urllib3 = "==1.22"
